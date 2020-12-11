@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>jpa-bootsfaces</title>
+</h:head>
+
+<h:body style="padding-top: 80px;">
+	<b:container fluid="true">
+		<b:navBar brand="jpa-bootsfaces" inverse="false" fixed="top" fluid="true" />
+		
+		<h:form id="formPessoa">
+			<b:growl id="mensagens" showDetail="true" sticky="true" />
+			<b:row>
+				<b:column span="3">
+					<b:panel collapsible="false">
+						<b:inputText placeholder="Nome" value="#{pessoaBean.pessoa.nome}" />
+						<b:inputText placeholder="Sobrenome" value="#{pessoaBean.pessoa.sobrenome}" />
+						<b:inputText placeholder="E-mail" value="#{pessoaBean.pessoa.email}" />
+
+						<b:buttonGroup>
+							<b:commandButton value="Novo" icon="file" action="#{pessoaBean.novo}" />
+							<b:commandButton value="Salvar" icon="floppy-disk" action="#{pessoaBean.salvar}" />
+							<b:commandButton value="Excluir" icon="trash" action="#{pessoaBean.remove}" />	
+						</b:buttonGroup>
+					</b:panel>
+				</b:column>
+
+				<b:column span="9">
+					<b:dataTable value="#{pessoaBean.pessoas}" var="p"
+						custom-lang-url="#{pessoaBean.urlPTBR}">
+						<b:dataTableColumn value="#{p.nome} #{p.sobrenome}" label="Nome" />
+						<b:dataTableColumn value="#{p.email}" label="E-mail" />
+						<b:dataTableColumn label="Ações" style="text-align: center;">
+							<b:commandButton title="Editar" icon="pencil" size="sm">
+								<f:setPropertyActionListener value="#{p}" target="#{pessoaBean.pessoa}" />
+							</b:commandButton>
+
+							<b:commandButton title="Excluir" icon="trash" action="#{pessoaBean.remove}"
+								onclick="return confirm('Tem certeza que deseja excluir #{p.nome} #{p.sobrenome}?')" size="sm">
+								<f:setPropertyActionListener value="#{p}" target="#{pessoaBean.pessoa}" />
+							</b:commandButton>
+						</b:dataTableColumn>
+					</b:dataTable>
+				</b:column>
+			</b:row>
+		</h:form>
+
+		<hr />
+		<p>© 2020 jpa-bootsfaces | Rafael Horochovec</p>
+	</b:container>
+</h:body>
+</html>

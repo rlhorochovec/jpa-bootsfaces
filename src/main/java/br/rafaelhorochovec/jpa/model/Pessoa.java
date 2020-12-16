@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "pessoa_seq", sequenceName = "pessoa_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "pessoa_gen", sequenceName = "pessoa_seq", initialValue = 1, allocationSize = 1)
 public class Pessoa implements Serializable {	
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_gen")
 	private Long id;
 	private String nome;
 	private String sobrenome;
